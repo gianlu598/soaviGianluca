@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <!--
+<link rel="stylesheet" type="text/css" href="../css/issStyle1.css">
+<script type="text/javascript" src="../css/issStyle.js"></script>
+-->
+<style type="text/css">
+body
+{
+    margin-left:  30px;
+    margin-right: 30px;
+};
+
+P
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+};
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+	font-size: 93%;
+}
+
+a:hover {
+    background-color: #cccccc;
+}
+
+
+hr {
+    clear: both;
+    height: 1px;
+    color: #242424;
+    background-color: transparent;
+}
+
+h1, h2, h3 {
+    color: #242424;
+    clear: left;
+    font: 100% Tahoma, Helvetica, Arial, sans-serif;
+    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+top {
+	width: 100%;
+}
+
+
+#i {
+    color: #ff1010;
+}
+tt{
+	font-family: "Arial";
+    font-size: 90%;
+	color: #006600;
+}
+em{
+	font-family: "Arial";
+    font-size: 80%;
+	font-weight: bold;
+	border-style:solid;
+	border-color: #abe876;
+    color: #1632cc;
+}
+bc{
+	font-family: "Arial";
+	font-size: 90%;
+	font-weight: bold;
+    color: #990000;
+	background-color: #fcf8c7;
+}
+ks{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #0000CD	;
+	font-size: 90%;
+}
+kc{
+	font-family: "Arial";
+	font-weight: bold;
+    color: #008000	;
+	font-size: 90%;
+}
+pre{
+	font-family: "Consolas";
+	font-size: 85%;
+	background-color: #f5f5f5;
+	border: 1.5px solid silver;
+	padding: 5px;
+}
+m{
+	font-family: "Helvetica";
+	line-height: 100%;
+ 	font-size: 75%;
+}
+div.body{
+	 
+    font-size: 18px;
+}
+k{
+    color: #990000;
+	font-weight: bold;
+	font-size: 90%;
+}
+h1 {
+    font-size: 150%;
+    background-color: #b2c0ff;
+	padding: 10px;
+}
+
+h2 {
+    background-color: #9ed8ff;
+    font-size: 130%;
+}
+
+h3 {
+	background-color: #e6ccff;
+    font-size: 100%;
+}
+h4 {
+    background-color: #ccffcc;
+    font-size: 100%;
+	width: 95%;
+	border-radius: 5px;
+	padding: 2px;
+}
+h5 {
+    background-color: #d5ffb0;
+    font-size: 100%;
+
+}
+div.req{
+	background-color: #d9ffb3;
+    font-size: 18px;
+	width: 700px;
+    border: 3px solid green;
+    padding: 15px;
+    margin: 10px;
+}
+div.remark{
+	background-color: #E3F2FD;
+    border: 1.5px solid #d5f2ed;
+    padding: 15px;
+    margin: 10px;
+	border-radius: 25px;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+ol, ul, li {
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  padding-bottom: 5px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+img {
+	border: 1.5px solid #d5f2ed
+
+}
+
+a, a:visited, a:active, a:link, a:hover {
+    text-decoration: underline;
+    color: #545454;
+    background-color: transparent;
+}
+
+div.wrapdesc{
+	width: 90%;
+	margin: auto;
+}
+
+div.imagedesc{
+	width: 85%;
+	margin: auto;
+}
+</style>
+    
+<head>
+   
+<title>resumableBoundaryWalker</title></head>
+    
+<body>
+<div id="top">
+<h1>Lab ISS | the project resumableBoundaryWalker<font size="5"></font> </h1>
+</div>  
+
+<div class="body"> 
+<h2>Introduction</h2>
+This case-study starts to deal with the design and development of proactive/reactive software systems which work under user-control.
+ 
+<h2 id="requirements">Requirements</h2>
+
+ 
+<div class="remark">
+ 
+Design and build a software system (named from now on 'the application') that leads the robot described in 
+<a href="https://htmlpreview.github.io/?https://github.com/anatali/issLab2021/blob/master/it.unibo.virtualRobot2020/userDocs/VirtualRobot2021.html" target="lab"><em>VirtualRobot2021.html</em></a> 
+to walk along the boundary of a empty, rectangular room under user control. 
+<br/>
+More specifically, the <ks>user story</ks> can be summarized as follows:
+<br/>
+<table style="width:98%">
+<tbody>	
+
+<tr>
+<td style="width:65%" >
+the robot is initially located at the <ks>HOME</ks> position, as shown in the picture on the rigth
+</td>
+<td><center><img src="./img/emptyGridWithHome.png" alt="emptyGridWithHome" width="35%"></center>
+</td>
+</tr>
+
+<tr>
+<td style="width:65%" >
+ the application presents to the user a <ks>consoleGui</ks> similar to that shown in the picture on the rigth
+</td>
+<td><center><img src="./img/stopResumeConsole.png" alt="stopResumeConsole" width="35%"></center>
+</td>
+</tr>
+
+
+
+<tr>
+<td style="width:65%" >
+when the user hits the button <k>RESUME</k> the robot <ks>starts or continue to walk</ks> along the boundary, while
+updating a <ks>robot-moves history</ks>;
+</td>
+<td> 
+</td>
+</tr>
+
+<tr>
+<td style="width:65%" >
+when the user hits the button <k>STOP</k> the robot stop its journey, waiting for another <k>RESUME</k> ;
+</td>
+<td> 
+</td>
+</tr>
+
+<tr>
+<td style="width:65%" >
+when the robot reachs its <ks>HOME</ks> again, the application <i>shows the robot-moves history</i> on the standard output device.
+</td>
+<td> 
+</td>
+</tr>
+
+
+ </tbody>
+</table>
+
+ 
+</div>
+
+ <h3>Delivery</h3>
+The customer <ks>hopes to receive</ks> a working prototype (written in Java ) of the application by <k>Monady 22 March</k>. 
+The name of this file (in pdf) should be:
+<pre>
+cognome_nome_resumablebw.pdf
+</pre>
+
+<!-- ANALISI DEI REQUISITI -->
+
+<h2>Requirement analysis</h2>
+Our <b>interaction with the custom</b> ha clarified that the customer intends:
+<ul>
+<li>for <ks>room</ks>: a conventional (rectangular) room of an house;</li>
+<li>for <ks>boundary</ks>: the perimeter of the room, that is physically delimited by solid <ks>walls</ks>;</li>
+<li>for <ks>robot</ks>: a device able to execute move commands sent over the network, as described in the document
+<a href="VirtualRobot2021.html#commands" target="web"><em>VirtualRobot2021.html</em></a> provided by the customer; </li>
+<li>for <ks>user control</ks>: the user decides when the robot has to walk its path and when it has to stop; </li>
+<li>for <ks>consoleGui</ks>: software application that allows the user to exercise the control over the robot; </li>
+<li>for <ks>robot-moves history</ks>: a representation of the path walked by the robot; </li>
+<li>for <ks>walk</ks>: the  robot moves forward, close to the room walls. </li>
+
+The customer does not impose any requirement on the programming language used to develop the application.
+
+</ul>
+<h3>User story</h3>
+A <ks>user story</ks> is specified in the <a href="#requirements">Requirements</a> part.
+
+<h3>Test plans</h3>
+The main aspects to check are:
+<ul>
+<li>when the robot reachs its <ks>HOME</ks> again, the path shown in the robot-moves history is the one expected; </li>
+<li>when the robot is stopped by the user, the robot-moves history must be consistent.</li>
+</ul>
+The tests must be carried out via software.
+</div>
+
+<!-- ANALISI DEL PROBLEMA -->
+
+<h2>Problem analysis</h2>
+We highlight that:
+<ol>
+<li>In the <a href="VirtualRobot2021.html#commands" target="web">VirtualRobot2021.html: commands</a> the customer states
+that the robot can receive move commands in two different ways:
+	<ul>
+	<li>by sending messages to the port <tt>8090</tt> using  <ks>HTTP POST</ks> </li>
+	<li>by sending messages to the port <tt>8091</tt> using a <ks>websocket</ks> </li>
+	</ul>
+</li>
+<li> With respect to the technological level, there are many libraries in many programming languages that support the
+required protcols. 
+<div class="remark">
+However, the problem does introduce an <k>abstraction gap at the conceptual level</k>,
+since <kc>the required logical interaction</kc> is always a <em>request-response</em>, <b>regardless of the technology</b> used to implement
+the interaction with the robot.
+</div>
+</li>
+</ol>
+
+<h3>Logical architecture</h3>
+ 
+<table style="width:98%">
+<tbody>	
+<tr>
+<td style="width:60%">
+We nust design and build a <k>distributed system</k> with two software macro-components:
+<ol>
+	<li>the <a href="VirtualRobot2021.html" target="web"><ks>VirtualRobot</ks></a>, given by the customer</li>
+	<li>our <ks>resumableBoundaryWalker</ks> application that interacts with the robot with a <i>request-response</i> pattern</li>
+</ol>
+Moreover, there is a third entity, the <ks>user</ks>, who interacts with the resumableBoundaryWalker through the <i>consoleGui</i>.
+<br/><br/>
+A first scheme of the logical architecture  of the systems can be defined as shown in the figure
+(for the meaning of the symbols, see the <a href="./img/legenda.png" target="web">legenda</a>)
+
+</td>
+<td>  <center><img src="./img/logicArch0.png" alt="logicArch0" width="100%" ></center>
+</td>
+</tr>
+</tbody>
+</table>
+
+<br/><br/>
+We observe that:
+<ul>
+<li>The specification of the exact 'nature' of our <em>resumableBoundaryWalker</em> software is left to the designer. 
+However, we can say here that is it <b>not a database, or a function or an object</b>.  
+<li>To make our <em>resumableBoundaryWalker</em> software <k>as much as possibile independent</k> from the undelying communication protocols,
+the designer could make reference to proper design pattern</li>
+<li>
+It is quite easy to define <k>what the robot has to do</k> the meet the boundary walk requirement:
+<pre>
+let us define <kc>emum direction {UP,DOWN,LEFT,RIGHT}</kc>
+the robot start in the HOME position, direction=DOWN
+for 4 times: 
+	1) send to the robot the request to execute the command <kc>moveForward</kc> 
+	and continue to do it, until the answer of the request becomes 'false'
+	2) send to the robot the request to execute the <kc>turnLeft</kc>
+For every move the robot-moves history is updated.
+</pre>
+</li>
+<li>
+To check the user control requirement it is recommended to run a part of the application (e.g. the robot walks a part of its path) and to
+check if the robot-moves history in consistent.
+</li>
+</ul>
+
+The following resources could be usefully exploited to reduce the development time of a first prototype of the application:
+
+<ol>
+<li>The  <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/consolegui/Consolegui.java" target="code">Consolegui.java</a>  
+(in project <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/consolegui" target="code">it.unibo.virtualrobotclient</a>) </li>
+
+<li>The  <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/RobotMovesInfo.java" target="code">RobotMovesInfo.java</a>  
+(in project <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv" target="code">it.unibo.virtualrobotclient</a>) </li>
+
+
+<li>The  <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv/RobotInputController.java" target="code">RobotInputController.java</a>  
+(in project <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/wenv" target="code">it.unibo.virtualrobotclient</a>) </li>
+</ol>
+
+The expected time required for the development of the application is (no more than) 6 hours.
+
+<!-- TEST PLANS -->
+<h2>Test plans</h2> 
+To check if the path shown in the robot-moves history is the one expected when the robot reachs its <ks>HOME</ks> again, a possible
+ test could be:
+<br/><br/>
+By setting the time for the moves in order to obtain movements of robot-units, we incrementally build a map ofthe territory
+ after each move. In this way we could know where the robot is after each command and therefore we could check the path taken at the 
+ end of the application; for example (1 represents the 'cells' traveled by the robot)
+<br/><br/>
+At the end of the application, the map must be something like this: 
+ <pre>
+ |r, 1, 1, 1, 1, 
+ |1, 0, 0, 0, 1, 
+ |1, 0, 0, 0, 1,
+ |1, 1, 1, 1, 1, 
+ </pre>
+ <!--
+<pre>
+...
+let us define <kc>String map="";</kc>
+for 4 times: 
+	1) send to the robot the request to execute the command <kc>moveForward</kc>;
+	if the answer is 'true' <ks>append the symbol "w"</ks> to <kc>moves</kc> and continue to do 1); 
+	2) when the answer of the request becomes 'false',
+	send to the robot the request to execute the command <kc>turnLeft</kc> and <ks>append the symbol "l"</ks> to <kc>moves</kc>
+</pre>
+
+To check if the robot-moves history must be consistent when the robot is stopped by the user, after 2 times the string <ks>moves</ks>
+should should have the typical structure of a regular expression that can be easily checked with a TestUnit software:
+<pre><kc>moves</kc>: <ks>"w*lw*l"</ks>     <kc><ks>*</ks> : repetion N times(N>=0) </pre>
+On the contrary, when the application terminates, the string <kc>moves</kc> should have another structure:
+<pre><kc>moves</kc>: <ks>"w*lw*lw*lw*l"</ks>     <kc><ks>*</ks> : repetion N times(N>=0) </pre>
+-->
+<h2>Project</h2> 
+
+This part starts with the same considerations made in the <a href="boudaryWalk.html#project"><em>BoundaryWalk project</em></a> and continue 
+with other considerations made in <a href="VirualrobotClients.html"><em>VirtualRobotClients file</em></a> up to the following structure:
+
+<p align="center"><img src="img/RobotBoundaryArilZooming.png" alt="pattern structure" height="60%" width="60%"></p>
+<br/>
+As explained at the end <a href="VirualrobotClients.html">VirtualRobotClients</a> there is a useful mapUtil which is recommended to use to represent
+the robot-moves history. To use it, it's necessary to implement an aril based communication, that we have already done in the first part of this project.
+<br/><br/>
+The provided <a href="../../it.unibo.virtualrobotclient/app/src/main/java/it/unibo/consolegui/Consolegui.java" target="code">Consolegui.java</a> file 
+allows the user to start, stop (by sending an halt move request) and resume the boundary walk according to its own needs.<br/>
+The <ks>controller</ks> of the application is associated to the <ks>ConsoleGui</ks> as an observer, so when a ConsoleGui button is pressed, the controller 
+can manage the event with the right handler.
+
+</div>
+
+<h2>Testing</h2> 
+ 
+
+<h2>Deployment</h2> 
+The deployment consists in the commit of the application on a project named <ks>iss2021_resumablebw</ks> of the MY GIT repository 
+( <k>https://github.com/gianlu598/soavigianluca</k> ).
+<br/><br/>
+The final commit commit has done after <k>4</k> hours of work.
+ 
+<h2>Maintenance</h2> 
+ 
+<!-- USEFUL
+<table style="width:100%" border="1">
+<tr>
+<td style="width:50%">
+</td>
+<td></td>
+</tr>
+</table>
+ QUESTIONS:
+chiarisce cosa il committente intende con 'Optionally'  
+chiarisce cosa il committente intende con 'should remember' 
+chiarisce cosa il committente intende con 'mental map'
+definisce la user story in modo da comprendere TUTTI i requisiti (anche opzionali)
+discute se sia meglio avvalersi di HTTP o delle websocket e perchè
+discute se sia meglio usare il linguaggio di comando cril, aril (o altro) e perchè
+discute se sia meglio muovere il robot in modo random o in modo organizzato 
+discute se il ritorno alla den debba/possa avvenire senza ricalcare il percorso effettuato
+presenta ogni TestPlan collegandolo ad una user story e in modo 'concreto' (non come un insieme di intenti)
+propone diverse tipologie di scene/situazioni per il testing
+individua e propone (motivandola) una lista di priorità per il soddisfacimento dei requisiti 
+presenta una stima dei tempi di realizzazione 
+presenta un elenco delle risorse che sarebbe opportuno avere e/o procurarsi
+presenta una architettura di progetto
+presenta dettagli di progetto che permettono una precisa implementazione da parte di chi legge
+pone in evidenza le parti di funzionamento proattivo e quelle di funzionamento reattivo
+ECCEDE nelle dimensioni del file (al momento > 1600Kb)
+
+
+-->
+	      	
+<br/><br/> 	
+</div>  
+
+<div style="background-color:rgba(86, 56, 253, 0.9); color:white">
+By Gianluca Soavi email: gianluca.soavi@studio.unibo.it  
+<img src="./img/fototessera.jpg" alt="me" width="8%" height="8%">
+</div> 
+</body>
+</html>

@@ -80,7 +80,7 @@ jacocoTestReport {
 
 application {
     // Define the main class for the application.
-    mainClass.set("it.unibo.virtualrobotclient.wenv.UsingConnTcpKt")
+    mainClass.set("it.unibo.iss2021_resumablebw.App")
 }
 
 

@@ -50,7 +50,7 @@ public class CautiousExplorerActor extends ActorBasicJava {
                     times = movesX;
                     doStep();
                     curState = State.walking;
-                } //else do nothing
+                } //else do nothing for stopping the robot after it returned to den after it found an obstacle
                 break;
             }
             case walking: {
